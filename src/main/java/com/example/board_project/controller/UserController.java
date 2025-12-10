@@ -6,10 +6,7 @@ import com.example.board_project.service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequiredArgsConstructor
@@ -26,5 +23,12 @@ public class UserController {
                 request.getEmail()
         );
         return ResponseEntity.status(HttpStatus.CREATED).body(UserDto.Response.from(registeredUser));
+    }
+
+    // 사용자 ID 조회
+    @GetMapping("/{userId}")
+    public ResponseEntity<UserDto.Response> getUser(@PathVariable Long userId) {
+        User user = userService.getUserById(userId);
+        return ResponseEntity.ok(UserDto.Response.from(user));
     }
 }
