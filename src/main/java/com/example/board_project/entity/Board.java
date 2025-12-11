@@ -1,12 +1,13 @@
 package com.example.board_project.entity;
 
 import jakarta.persistence.*;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 @Entity
-@Data
+@Getter
 @NoArgsConstructor
+@AllArgsConstructor
+@Builder
 @Table(name = "board")
 public class Board {
     @Id
