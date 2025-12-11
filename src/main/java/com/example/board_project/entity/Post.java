@@ -1,8 +1,7 @@
 package com.example.board_project.entity;
 
 import jakarta.persistence.*;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
@@ -10,9 +9,11 @@ import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 import java.time.LocalDateTime;
 
 @Entity
-@Data
-@NoArgsConstructor
-@Table(name = "board")
+@Getter
+@Builder
+@AllArgsConstructor
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
+@Table(name = "post")
 @EntityListeners(AuditingEntityListener.class)
 public class Post {
     @Id
@@ -32,12 +33,13 @@ public class Post {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "board_id", nullable = false)
-    private Post board;
+    private Board board;
 
     @CreatedDate
-    @Column(updatable = false)
+    @Column(name = "create_time", updatable = false, columnDefinition = "TIMESTAMP")
     private LocalDateTime createTime;
 
     @LastModifiedDate
+    @Column(name = "update_time", columnDefinition = "TIMESTAMP")
     private LocalDateTime updateTime;
 }
