@@ -1,0 +1,35 @@
+server:
+  port: 8080
+
+spring:
+  application:
+    name: board-project
+
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/board_db?useSSL=false&serverTimezone=Asia/Seoul&characterEncoding=UTF-8&allowPublicKeyRetrieval=true
+    username: root
+    password: goormgoorm
+    hikari:
+      maximum-pool-size: 20   # ???? (?? ??)
+
+  jpa:
+    hibernate:
+      ddl-auto: update              # ??? ? update, ??? ? validate? none
+      show-sql: true
+    properties:
+      hibernate:
+        boot:
+          allow_jdbc_metadata_access: true
+        format_sql: true
+        use_sql_comments: true
+        # Hibernate 6~7?? ?? ??
+        #temp:
+          #use_jdbc_metadata_defaults: false  #???? ??..
+    open-in-view: false
+
+
+  # (??) H2 ??? ? ??? ??. ???? ?? ??
+  h2:
+    console:
+      enabled: false
